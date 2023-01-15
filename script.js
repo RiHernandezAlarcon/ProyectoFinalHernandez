@@ -24,7 +24,7 @@ let text_bienvenida = `Bienvenido a nuestra tienda online de disfraces "Random H
 *No sabes que disfraz usar, atrévete y compra un disfraz aleatorio y se parte de la tendencia.
 *Solo por hoy 25% en el total de tu compra por sobre $100.0
  
-Selecciona un productos:
+Selecciona un producto:
 1. ${p1} ($${p1_v})
 2. ${p2} ($${p2_v})
 3. ${p3} ($${p3_v})
@@ -133,7 +133,7 @@ function menu_producto(numero_producto){
 
     ${detalle_compra}
     Total: $${total}
-    Descuento ${descuento}%: $${total*descuento}
+    Descuento ${descuento*100}%: $${total*descuento}
     Total a pagar: $${total-total*descuento}
 
     Opciones:
