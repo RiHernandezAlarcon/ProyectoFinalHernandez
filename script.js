@@ -8,7 +8,7 @@ let p1 = `Disfraz total random`
 let p2 = 'Disfraz de videojuegos'
 let p3 = 'Disfraz de super héroes o villanos'
 let p4 = 'Disfraz estilo la purga'
-let p5 = 'Disfraz de culturas'
+let p5 = 'Disfraz de animales'
 let p6 = 'Disfraz de oficios'
 
 //1.2 precios de los productos en dólares
