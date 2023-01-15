@@ -113,7 +113,7 @@ function menu_producto(numero_producto){
 
     let cantidad_producto = NaN
     while(isNaN(cantidad_producto) || cantidad_producto<0){
-        cantidad_producto = parseInt(prompt(`¿Cuantos unidades: ${prod} de $${val} quieres llevar?`))
+        cantidad_producto = parseInt(prompt(`¿Cuantos unidades de '${prod}' a $${val} quieres llevar?`))
     }
     //alert("Producto se ha añadido al carro de compras")
 
