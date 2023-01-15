@@ -5,11 +5,11 @@ let detalle_compra = ``
 
 //1.1 detalles de los productos
 let p1 = `Disfraz total random`
-let p2 = 'Disfraz de videojuegos'
-let p3 = 'Disfraz de super héroes o villanos'
+let p2 = 'Disfraz de videojuego'
+let p3 = 'Disfraz de super héroe o villano'
 let p4 = 'Disfraz estilo la purga'
-let p5 = 'Disfraz de animales'
-let p6 = 'Disfraz de oficios'
+let p5 = 'Disfraz de animal'
+let p6 = 'Disfraz de un oficio'
 
 //1.2 precios de los productos en dólares
 let p1_v = 15
