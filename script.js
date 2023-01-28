@@ -2,22 +2,34 @@
 let total = 0
 let descuento = 0
 let detalle_compra = ``
+let registrado = false
+let usuario1 = NaN
+//array de objetos para los productos en carro
+const producto_en_carro_numero = []
+const producto_en_carro_cantidad = []
 
-//1.1 detalles de los productos
-let p1 = `Disfraz total random`
-let p2 = 'Disfraz de videojuego'
-let p3 = 'Disfraz de super héroe o villano'
-let p4 = 'Disfraz estilo la purga'
-let p5 = 'Disfraz de animal'
-let p6 = 'Disfraz de un oficio'
+//1.1 Lista para los detalles del producto con formato: [str: producto, float: precio]
+let pyv = [[`Disfraz total random`,15],
+            ['Disfraz de videojuego',23],
+            ['Disfraz de super héroe o villano',22],
+            ['Disfraz estilo la purga',19],
+            ['Disfraz de animal',18],
+            ['Disfraz de un oficio',17],
+            ['Disfraz de anime',13],
+            ['Disfraz de animales acuaticos',27],
+            ['Disfraz de objetos',19],
+            ['Disfraz de dinosaurio',33]]
 
-//1.2 precios de los productos en dólares
-let p1_v = 15
-let p2_v = 23
-let p3_v = 22
-let p4_v = 19
-let p5_v = 18
-let p6_v = 17
+
+function filter_productos(lista){
+    let a,b
+    a=lista[0]
+    b=lista[1]
+    return b<20
+}   
+//Filtro para solo mostrar productos con precio menor a 20 dolares.
+pyv = pyv.filter(filter_productos)
+
 
 //1.3 texto menú bienvenida separado para mejor visualización y apreciación del código
 let text_bienvenida = `Bienvenido a nuestra tienda online de disfraces "Random Halloween".
@@ -25,107 +37,73 @@ let text_bienvenida = `Bienvenido a nuestra tienda online de disfraces "Random H
 *Solo por hoy 25% en el total de tu compra por sobre $100.0
  
 Selecciona un producto:
-1. ${p1} ($${p1_v})
-2. ${p2} ($${p2_v})
-3. ${p3} ($${p3_v})
-4. ${p4} ($${p4_v})
-5. ${p5} ($${p5_v})
-6. ${p6} ($${p6_v})
+${print_detalles()}
+
+Escribe 'REGISTRAR' para registrarte como usuario.
 `
 
-//función para retornar el nombre de un producto
-function return_prod(numero_producto){
-    switch(numero_producto){
-        case '1':
-            return p1
-        case '2':
-            return p2
-        case '3':
-            return p3
-        case '4':
-            return p4
-        case '5':
-            return p5
-        case '6':
-            return p6
-        default:
-            return p6 //temporal
+
+function print_detalles(){
+    let i = 1
+    let descripcion = ``
+    pyv.forEach(element => {
+        descripcion += `
+        ${i}. ${element[0]} ($${element[1]})`
+        i+=1
+    });
+
+    return descripcion
+}
+    
+function almacenar_detalles_compra(numero_producto,cantidad){
+
+    let idx = producto_en_carro_numero.indexOf(numero_producto)
+
+    if(idx==-1){
+        producto_en_carro_numero.push(numero_producto)
+        producto_en_carro_cantidad.push(cantidad)
+    }else{
+        producto_en_carro_cantidad[idx] += cantidad
     }
+    
 }
 
-//función para retornar el valor de un producto
-function return_val(numero_producto){
-    switch(numero_producto){
-        case '1':
-            return p1_v
-        case '2':
-            return p2_v
-        case '3':
-            return p3_v
-        case '4':
-            return p4_v
-        case '5':
-            return p5_v
-        case '6':
-            return p6_v
-        default:
-            return p1_v 
+function detalle_compra_function(){
+    
+    detalle_compra = ``
+    total = 0
+    descuento=0
+    for(let i=0; i< producto_en_carro_numero.length; i++){
+        let n_prod = producto_en_carro_numero[i]
+        let cantidad_producto = producto_en_carro_cantidad[i]
+        //resumen_compra(numero_producto,cantidad_producto)
+        
+        detalle_compra += `+ $${pyv[n_prod][1]*cantidad_producto} | ${pyv[n_prod][0]} ($${pyv[n_prod][1]}) x ${cantidad_producto} unidades
+    ` 
+        console.log(detalle_compra)
+        total += pyv[n_prod][1]*cantidad_producto
     }
-}
-
-
-function resumen_compra(numero_producto,cantidad){
-    switch(numero_producto){
-        case '1':
-            detalle_compra += `+ ${p1_v*cantidad}: ${p1} ($${p1_v}) x ${cantidad} unidades 
-            `
-        break;
-        case '2':
-            detalle_compra += `+ ${p2_v*cantidad}: ${p2} ($${p2_v}) x ${cantidad} unidades 
-            `
-        break;
-        case '3':
-            detalle_compra += `+ ${p3_v*cantidad}: ${p3} ($${p3_v}) x ${cantidad} unidades 
-            `
-        break;
-            
-        case '4':
-            detalle_compra += `+ ${p4_v*cantidad}: ${p4} ($${p4_v}) x ${cantidad} unidades 
-            `
-        break;
-           
-        case '5':
-            detalle_compra += `+ ${p5_v*cantidad}: ${p5} ($${p5_v}) x ${cantidad} unidades 
-            `
-        break;
-            
-        case '6':
-            detalle_compra += `+ ${p6_v*cantidad}: ${p6} ($${p6_v}) x ${cantidad} unidades 
-            `
-        break;
+    
+    if (total >100){
+        descuento = 0.25
     }
+
 }
 
 function menu_producto(numero_producto){
     let prod, val
-    prod = return_prod(numero_producto)
-    val = return_val(numero_producto)
+    [prod,val] = pyv[numero_producto]
 
     let cantidad_producto = NaN
     while(isNaN(cantidad_producto) || cantidad_producto<0){
         cantidad_producto = parseInt(prompt(`¿Cuantos unidades de '${prod}' a $${val} quieres llevar?`))
     }
-    //alert("Producto se ha añadido al carro de compras")
 
-    //resumen_compra(numero_producto,cantidad_producto)
-    detalle_compra += `+ $${val*cantidad_producto} | ${prod} ($${val}) x ${cantidad_producto} unidades
-    ` 
-    total += val*cantidad_producto
-    // ${prod} ($${val}) x ${cantidad_producto} unidades
-    // Total a pagar: $${cantidad_producto*val}.
-    if (total >100){
-        descuento = 0.25
-    }
+    //guardar producto y cantidad de compra.
+    almacenar_detalles_compra(numero_producto,cantidad_producto)
+    detalle_compra_function()
+
+    
         
     let opcion = 0
     while(opcion!=1 && opcion!=2){
@@ -142,20 +120,54 @@ function menu_producto(numero_producto){
     }
 
     if (opcion==1){
-        alert('Muchas gracias por tu compra')
+        if(registrado==false){
+            registro()
+        }
+        alert(`Muchas gracias ${usuario1.nombre} por tu compra
+        
+        Tu pedido llegara entre 3 a 5 días hábiles a la dirección: ${usuario1.direccion}, si existe la necesidad de contactarte lo haremos al numero ${usuario1.celular}
+        
+        Número de seguimiento: 03330204431 en www.enviosreinmediatos.com/seguimiento/0302`)
     }else{
     menu_bienvenida()}
 
 
 }
 
+class Usuario{
+    constructor(nombre,direccion,celular){
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.celular = celular;
+    }
+}
+
+
+
+function registro(){
+    if(registrado == false){
+        registrado = true
+        nombre=prompt('Ingrese nombre de usuario')
+        direccion=prompt('Ingrese dirección')
+        celular=prompt('Ingrese su numero de celular')
+        usuario1 = new Usuario(nombre,direccion,celular)
+    }else{
+        alert('Error al ingresar el usuario. Ya existe un usuario registrado')
+    }  
+}
+
 function menu_bienvenida(){
 
-    let np = 0 //numero del producto
-    while(np!=1 && np!=2 && np!=3 && np!=4 && np!=5 && np!=6){
+    let np = 0 //numero del producto o 'REGISTRAR'
+    while(np!=1 && np!=2 && np!=3 && np!=4 && np!=5 && np!=6 && np!='REGISTRAR'){
         np = prompt(text_bienvenida)
     }
-    menu_producto(np)
+    if(np=='REGISTRAR'){
+        registro()
+        menu_bienvenida()
+    }
+    
+    menu_producto(np-1)
 }
 
 function main(){
