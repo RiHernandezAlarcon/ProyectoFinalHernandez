@@ -1,0 +1,188 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    border: 0px;
+  }
+
+li{
+    list-style: none;
+}
+
+.link{
+    text-decoration: none;
+    color: black;
+}
+
+header{
+    background-color: rgb(212, 212, 212);
+    /* height: 100px; */
+    display: grid;
+    grid-template-columns: 20% 70% 10%;
+    grid-template-rows: 80px;
+    grid-template-areas: "a1 a2 a3";
+    /* flex-direction: row;
+    align-items: center;
+    justify-content:space-around; */
+}
+nav{
+    background-color: rgb(212, 154, 154);
+    height: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-evenly;
+    margin-bottom: 10px;
+}
+main{
+    justify-content: center;
+    margin: 20px;
+    padding: 5px;
+
+}
+#div_logo{
+    grid-area: a1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:space-evenly;
+
+}
+#img_logo{
+    height: 95%;
+}
+#div_carro{
+    grid-area: a3;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content:space-evenly;
+}
+#link_carro_page{
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+#img_carro{
+    height: 35%;
+}
+
+#div_main{
+    display: grid;
+    grid-template-columns: 25% 75%;
+    grid-template-rows: 100%;
+    grid-template-areas: "a1 a2";
+}
+
+#div_filter{
+    padding: 10px;
+    background-color: rgb(161, 218, 218);
+    display: flex;
+    flex-direction: column;
+    
+}
+#div_productos{
+    background-color: rgb(212, 154, 154);
+    display: flex;
+    flex-wrap: wrap;
+    row-gap:initial;
+    /* flex-direction: row; */
+}
+
+.card_producto{
+    background-color: rgb(255, 255, 255);
+    margin: 10px;
+    padding: 10px;
+    width: 250px;
+    height: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.pedal_img{
+    padding: 5px;
+    /* width: 70%; */
+    height: 60%;
+}
+
+.txt{
+    margin-bottom: 0px; 
+}
+
+#main_carro{
+    display: grid;
+    grid-template-columns: 70% 30%;
+    grid-template-rows: 100%;
+    grid-template-areas: "a1 a2";
+}
+#grid_productos_carro{
+    grid-area: a1;
+}
+
+#box_pago{
+    grid-area: a2;
+    background-color: rgb(212, 154, 154);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100px;
+}
+
+#encabezados_carro{
+    display: grid;
+    grid-template-columns: 25% 25% 15% 15% 10% 10%;
+    grid-template-rows: 30px;
+    grid-template-areas: ". . b3 b4 b5 .";
+}
+#titulo_precio{
+    grid-area: b3;
+}
+#titulo_cantidad{
+    grid-area: b4;
+}
+#titulo_subtotal{
+    grid-area: b5;
+}
+
+#card_in_carro{
+    display: grid;
+    grid-template-columns: 25% 25% 15% 15% 10% 10%;
+    grid-template-rows: 150px;
+    grid-template-areas: "c1 c2 c3 c4 c5 c6";
+    align-items: center;
+    justify-items: center;
+} 
+
+#img_card_carro{
+    grid-area: c1;
+    height: 90%;
+}
+#description_card_carro{
+    grid-area: c2;
+    display: flex;
+    flex-direction: column;
+}
+
+#precio_card_carro{
+    grid-area: c3;
+}
+#cantidad_card_carro{
+    grid-area: c4;
+}
+#subtotal_card_carro{
+    grid-area: c5;
+}
+#X_card{
+    grid-area: c6;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#div_txt{
+    text-align: center;
+}
+
+
