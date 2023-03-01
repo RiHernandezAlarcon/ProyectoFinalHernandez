@@ -146,7 +146,7 @@ main{
     grid-area: b5;
 }
 
-#card_in_carro{
+.card_in_carro{
     display: grid;
     grid-template-columns: 25% 25% 15% 15% 10% 10%;
     grid-template-rows: 150px;
@@ -176,11 +176,22 @@ main{
 }
 #X_card{
     grid-area: c6;
-    display: flex;
+}
+
+.btn-circle {
+    width: 30px;
+    height: 30px;
+    padding: 6px 0px;
+    border-radius: 15px;
+    text-align: center;
+    font-size: 12px;
+    line-height: 1.42857;
+    display: flex; 
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
+
 #div_txt{
     text-align: center;
 }

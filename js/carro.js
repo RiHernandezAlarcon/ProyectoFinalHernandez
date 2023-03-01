@@ -3,6 +3,7 @@ let pedales_en_carro = []
 if(localStorage.getItem("pedales_en_carro")){
     pedales_en_carro = JSON.parse(localStorage.getItem("pedales_en_carro"))
 }
+console.log(pedales_en_carro[1])
 
 let productos_carro = document.getElementById("cards_in_carro")
 
@@ -29,35 +30,77 @@ pedales_en_carro.forEach(pedal => {
     }
 })
 
-console.log(ids)
-console.log(cantidad)
-console.log(new_pedales_en_carro)
+let total_value
+let selected_values = []
+let total_txt = document.getElementById("total_pagar")
 
+function mostrar_carro(){
+    total_value = 0
+    productos_carro.innerHTML = ``
+    new_pedales_en_carro.forEach(pedal => {
+        productos_carro.innerHTML += 
+        ` <div class="card_in_carro" id="card_pedal_${pedal.id}">
+        <img id="img_card_carro" src="../${pedal.img}" alt="">
+        <div id="description_card_carro">
+            <p class="txt">${pedal.nombre}</p>
+            <p class="txt">${pedal.marca}</p>
+            <p class="txt">Stock: Disponible</p>
+        </div>
+        <p class="precio_card_carro txt">$${pedal.precio}</p>
+        <!--  <div class="cantidad_card_cerro"> ${pedal.cantidad} </div> -->
+        <div class="cantidad_card_carro">
+            <select id="select_${pedal.id}" class="selectpicker select_in_carro" onchange="refresh_values()">
+            <option class="select_option">1</option>
+            <option class="select_option">2</option>
+            <option class="select_option">3</option>
+            <option class="select_option">4</option>
+            <option class="select_option">5</option>
+            <option class="select_option">6</option>
+            <option class="select_option">7</option>
+            <option class="select_option">8</option>
+            <option class="select_option">9</option>
+            <option class="select_option">10</option>
+            </select>
 
-let total_value = 0
-productos_carro.innerHTML = ``
-new_pedales_en_carro.forEach(pedal => {
-    
-    productos_carro.innerHTML += 
-    ` <div id="card_in_carro">
-    <img id="img_card_carro" src="../${pedal.img}" alt="">
-    <div id="description_card_carro">
-        <p class="txt">${pedal.nombre}</p>
-        <p class="txt">${pedal.marca}</p>
-        <p class="txt">Stock: Disponible</p>
-    </div>
-    <p class="precio_card_carro txt">$${pedal.precio}</p>
-    <div class="cantidad_card_cerro"> ${pedal.cantidad}</div>
-    <p class="subtotal_card_carro txt">$${pedal.precio*pedal.cantidad}</p>
-    <p class="X_card txt"> </p>
-    </div>`
-    total_value+=pedal.precio*pedal.cantidad
+        </div>
+
+        <p class="subtotal_card_carro txt">$${pedal.precio*pedal.cantidad}</p>
+        <button type="button" class="btn btn-warning btn-circle btn_eliminate" id="btn_elim_${pedal.id}">X</button>
+        </div>`
+        total_value+=pedal.precio*pedal.cantidad
+    })
+    total_txt.innerText = `Total $${total_value}`
+
+    console.log(new_pedales_en_carro)
+    new_pedales_en_carro.forEach(pedal => {
+         let selected_value = document.getElementById(`select_${pedal.id}`)
+         selected_value.value =pedal.cantidad
+    })
+}
+
+mostrar_carro()
+
+function refresh_values(){
+    new_pedales_en_carro.forEach(pedal => {
+        let selected_value = document.getElementById(`select_${pedal.id}`)
+        pedal.cantidad=parseInt(selected_value.value)
+   })
+    mostrar_carro()  
+}
+
+let btn_eliminate_list = Array.from(document.getElementsByClassName("btn_eliminate"))
+console.log(btn_eliminate_list)
+
+btn_eliminate_list.forEach(btn => {
+    btn.onclick = function(){
+
+        let card_pedal = document.getElementById(btn.id)
+        console.log(btn.id.split('btn_elim_')[1])
+        ////card_pedal.remove()
+    }
 })
 
 
-
-let total_txt = document.getElementById("total_pagar")
-total_txt.innerText = `Total $${total_value}`
 
 let btn_pagar = document.getElementById("btn_pagar")
 let div_txt = document.getElementById("div_txt_carro")

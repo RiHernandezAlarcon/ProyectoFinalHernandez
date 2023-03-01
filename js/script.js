@@ -80,8 +80,15 @@ function get_buttons_agregar_c(){
 
 function activate_events_button(){
     btn_to_carro.forEach(btn => {
-        btn.onclick= function(){
+        btn.onclick = function(){
             agregar_pedal(lista_pedales[btn.value])
+            Toastify({
+                text: "Pedal añadido al carro",
+                className: "info",
+                stopOnFocus: false,
+                duration: 1200
+                }).showToast();
+                
         }
     }) 
 }
