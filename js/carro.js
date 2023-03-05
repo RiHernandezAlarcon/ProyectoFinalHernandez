@@ -21,6 +21,8 @@ let pedales_resumen = []
 function pedales_to_pedales_resumen(){
     //guardar ids de los pedales junto con su cantidad
     pedales_resumen = []
+    cantidad = []
+    ids=[]
     pedales_en_carro.forEach(pedal => {
     if(ids.includes(pedal.id)){
         //esta en ids
@@ -36,6 +38,8 @@ function pedales_to_pedales_resumen(){
         cantidad.push(1)
     }
     })
+    console.log("pedales_en_resumen")
+    console.log(pedales_resumen)
 }
 
 pedales_to_pedales_resumen()
@@ -47,6 +51,8 @@ let total_txt = document.getElementById("total_pagar")
 function mostrar_carro(){
     total_value = 0
     productos_carro.innerHTML = ``
+    console.log("pedales resumen en mostrar carro()")
+    console.log(pedales_resumen)
     pedales_resumen.forEach(pedal => {
         productos_carro.innerHTML += 
         ` <div class="card_in_carro" id="card_pedal_${pedal.id}">
@@ -81,8 +87,6 @@ function mostrar_carro(){
     })
     total_txt.innerText = `Total $${total_value}`
 
-    console.log(pedales_resumen
-    )
     pedales_resumen.forEach(pedal => {
          let selected_value = document.getElementById(`select_${pedal.id}`)
          selected_value.value =pedal.cantidad
@@ -109,40 +113,34 @@ function refresh_values(){
     pedales_resumen.forEach(pedal => {
         let selected_value = document.getElementById(`select_${pedal.id}`)
         pedal.cantidad=parseInt(selected_value.value)
-        //function para convertir formato con cantidades a lista
-        //pedales resumen a pedales_en_carro
         resumen_to_pedales_en_carro()
-
    })
-    mostrar_carro()  
+    mostrar_carro()
 }
 
+
+
 let btn_eliminate_list = Array.from(document.getElementsByClassName("btn_eliminate"))
-console.log(btn_eliminate_list)
 
-btn_eliminate_list.forEach(btn => {
+function eliminar_pedal(){
+    btn_eliminate_list = Array.from(document.getElementsByClassName("btn_eliminate"))
+    btn_eliminate_list.forEach(btn => {
     btn.onclick = function(){
-
-        console.log(`card_pedal_${btn.id.split('btn_elim_')[1]}`)
-        let card_pedal = document.getElementById(`card_pedal_${btn.id.split('btn_elim_')[1]}`)
-        //card_pedal.remove(card_pedal)
+        let id_pedal = parseInt(btn.id.split('btn_elim_')[1])
+        let pedales_a_conservar = pedales_en_carro.filter(pedal => pedal.id != id_pedal);
+        console.log(pedales_a_conservar)
+        pedales_en_carro = pedales_a_conservar
+        localStorage.setItem("pedales_en_carro", JSON.stringify(pedales_en_carro))
+        pedales_to_pedales_resumen()
+        mostrar_carro()
+        //pedales_to_pedales_resumen()
         
-        //busco prod a eliminar
-        // let productoEliminar = array.find(libro => libro.id == productoCarrito.id)
-        // console.log(productoEliminar)
-        // //busco el indice
-        // let posicion = array.indexOf(productoEliminar)
-        // console.log(posicion)
-        // //splice (posicion donde trabajar, cant de elementos a eliminar)
-        // array.splice(posicion, 1)
-        // console.log(array)
-        // //eliminar storage (volver a setear)
-        // localStorage.setItem("carrito", JSON.stringify(array))
-        // //recalcular total
-        // compraTotal(array)
-    // })
-    }
-})
+        //mostrar_carro(pedales_resumen)
+        //solucion facil: resetar pagina
+    }})
+
+}
+eliminar_pedal()
 
 
 
