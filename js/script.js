@@ -28,6 +28,7 @@ const pedal13 = new Pedal(13,"Mini Tremolo","IBANEZ","74000","img/ibanez mini tr
 
 let lista_pedales = []
 lista_pedales.push(pedal0,pedal1,pedal2,pedal3,pedal4,pedal5,pedal6,pedal7,pedal8,pedal9,pedal10,pedal11,pedal12,pedal13)
+localStorage.setItem("lista_pedales", JSON.stringify(lista_pedales))
 
 let productos = document.getElementById("div_productos")
 
@@ -86,7 +87,7 @@ function activate_events_button(){
                 text: "Pedal añadido al carro",
                 className: "info",
                 stopOnFocus: false,
-                duration: 1200
+                duration: 1000
                 }).showToast();
                 
         }
