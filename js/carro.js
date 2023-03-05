@@ -116,14 +116,16 @@ function refresh_values(){
         resumen_to_pedales_en_carro()
    })
     mostrar_carro()
+    activate_eliminar_pedal()
 }
 
 
 
-let btn_eliminate_list = Array.from(document.getElementsByClassName("btn_eliminate"))
-
-function eliminar_pedal(){
+let btn_eliminate_list
+function activate_eliminar_pedal(){
     btn_eliminate_list = Array.from(document.getElementsByClassName("btn_eliminate"))
+    console.log("buttons")
+    console.log(btn_eliminate_list)
     btn_eliminate_list.forEach(btn => {
     btn.onclick = function(){
         let id_pedal = parseInt(btn.id.split('btn_elim_')[1])
@@ -133,14 +135,9 @@ function eliminar_pedal(){
         localStorage.setItem("pedales_en_carro", JSON.stringify(pedales_en_carro))
         pedales_to_pedales_resumen()
         mostrar_carro()
-        //pedales_to_pedales_resumen()
-        
-        //mostrar_carro(pedales_resumen)
-        //solucion facil: resetar pagina
     }})
-
 }
-eliminar_pedal()
+activate_eliminar_pedal()
 
 
 
