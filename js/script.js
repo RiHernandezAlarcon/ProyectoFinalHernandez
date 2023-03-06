@@ -1,3 +1,8 @@
+let pedales_en_carro = []
+if(localStorage.getItem("pedales_en_carro")){
+    pedales_en_carro = JSON.parse(localStorage.getItem("pedales_en_carro"))
+}
+
 class Pedal{
     constructor(id,nombre,marca,precio,img){
         this.id = id;
@@ -8,27 +13,29 @@ class Pedal{
     }
 }
 
-const pedal0 = new Pedal(0,"Tube Screamer","IBANEZ","96000","img/ibanez tube screamer.jpg")
-const pedal1 = new Pedal(1,"Vintage Overdrive","JOYO","42000","img/Joyo-Vintage.jfif")
-const pedal2 = new Pedal(2,"Vintage Phase","JOYO","46000","img/JoyoVintagePhase.avif")
-const pedal3 = new Pedal(3,"Analog Chorus","JOYO","40000","img/Joyo-Analog Chorus.webp")
-const pedal4 = new Pedal(4,"Analog Delay","JOYO","48000","img/Joyo-Analog Delay.jpg")
-const pedal5 = new Pedal(5,"The Big Orange","CALINE","52000","img/Caline The big orange.jpg")
-const pedal6 = new Pedal(6,"Snake Bite","CALINE","58000","img/Caline Snake bite.webp")
-const pedal7 = new Pedal(7,"Super Overdrive","BOSS","72000","img/boss overdrive.png")
-const pedal8 = new Pedal(8,"Distortion DS-1","BOSS","66000","img/boss turbo distorsion.jpg")
-
-const pedal9 = new Pedal(9,"Big Muff","EH","90000","img/EH Bigmuff.jpg")
-const pedal10 = new Pedal(10,"Nano Looper","EH","86000","img/EH looper.webp")
-const pedal11 = new Pedal(11,"Nano Clone","EH","70000","img/EH nano.jpg")
-
-const pedal12 = new Pedal(12,"Mini Chorus","IBANEZ","78000","img/ibanez mini chorus.jpg")
-const pedal13 = new Pedal(13,"Mini Tremolo","IBANEZ","74000","img/ibanez mini tremolo.jpg")
-
-
 let lista_pedales = []
-lista_pedales.push(pedal0,pedal1,pedal2,pedal3,pedal4,pedal5,pedal6,pedal7,pedal8,pedal9,pedal10,pedal11,pedal12,pedal13)
-localStorage.setItem("lista_pedales", JSON.stringify(lista_pedales))
+function read_pedales(){
+    const pedal0 = new Pedal(0,"Tube Screamer","IBANEZ",parseInt(96000/valor_dolar),"img/ibanez tube screamer.jpg")
+    const pedal1 = new Pedal(1,"Vintage Overdrive","JOYO",parseInt(42000/valor_dolar),"img/Joyo-Vintage.jfif")
+    const pedal2 = new Pedal(2,"Vintage Phase","JOYO",parseInt(46000/valor_dolar),"img/JoyoVintagePhase.avif")
+    const pedal3 = new Pedal(3,"Analog Chorus","JOYO",parseInt(40000/valor_dolar),"img/Joyo-Analog Chorus.webp")
+    const pedal4 = new Pedal(4,"Analog Delay","JOYO",parseInt(48000/valor_dolar),"img/Joyo-Analog Delay.jpg")
+    const pedal5 = new Pedal(5,"The Big Orange","CALINE",parseInt(52000/valor_dolar),"img/Caline The big orange.jpg")
+    const pedal6 = new Pedal(6,"Snake Bite","CALINE",parseInt(58000/valor_dolar),"img/Caline Snake bite.webp")
+    const pedal7 = new Pedal(7,"Super Overdrive","BOSS",parseInt(72000/valor_dolar),"img/boss overdrive.png")
+    const pedal8 = new Pedal(8,"Distortion DS-1","BOSS",parseInt(66000/valor_dolar),"img/boss turbo distorsion.jpg")
+    
+    const pedal9 = new Pedal(9,"Big Muff","EH",parseInt(90000/valor_dolar),"img/EH Bigmuff.jpg")
+    const pedal10 = new Pedal(10,"Nano Looper","EH",parseInt(86000/valor_dolar),"img/EH looper.webp")
+    const pedal11 = new Pedal(11,"Nano Clone","EH",parseInt(70000/valor_dolar),"img/EH nano.jpg")
+    
+    const pedal12 = new Pedal(12,"Mini Chorus","IBANEZ",parseInt(78000/valor_dolar),"img/ibanez mini chorus.jpg")
+    const pedal13 = new Pedal(13,"Mini Tremolo","IBANEZ",parseInt(74000/valor_dolar),"img/ibanez mini tremolo.jpg")
+    
+    lista_pedales.push(pedal0,pedal1,pedal2,pedal3,pedal4,pedal5,pedal6,pedal7,pedal8,pedal9,pedal10,pedal11,pedal12,pedal13)
+    localStorage.setItem("lista_pedales", JSON.stringify(lista_pedales))
+}
+
 
 let productos = document.getElementById("div_productos")
 
@@ -64,10 +71,7 @@ function filtro_precio(li,ls){
     get_buttons_agregar_c()
 }
 
-let pedales_en_carro = []
-if(localStorage.getItem("pedales_en_carro")){
-    pedales_en_carro = JSON.parse(localStorage.getItem("pedales_en_carro"))
-}
+
 // funcion para agregar objeto al carro
 function agregar_pedal(pedal){
     pedales_en_carro.push(pedal)
@@ -139,6 +143,14 @@ rb_list[3].onclick= function(){
     activate_filtro_precio()
 }
 
-activate_filtro_precio()
+// activate_filtro_precio()
 
-
+//consumo API del valor del dolar en pesos chilenos
+let valor_dolar
+fetch('https://mindicador.cl/api')
+    .then((response)=> response.json())
+    .then((json)=> {
+        valor_dolar=json.dolar.valor
+        read_pedales()
+        activate_filtro_precio()}
+    )
