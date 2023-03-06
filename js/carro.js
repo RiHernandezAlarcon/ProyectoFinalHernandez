@@ -135,6 +135,7 @@ function activate_eliminar_pedal(){
         localStorage.setItem("pedales_en_carro", JSON.stringify(pedales_en_carro))
         pedales_to_pedales_resumen()
         mostrar_carro()
+        activate_eliminar_pedal()
     }})
 }
 activate_eliminar_pedal()
