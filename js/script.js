@@ -109,13 +109,13 @@ function activate_filtro_precio(){
                     cargar_pedales()
                     break
                   case 1:
-                    filtro_precio(0,50000)  
+                    filtro_precio(0,60)  
                     break
                   case 2:
-                    filtro_precio(50000,70000)  
+                    filtro_precio(60,90)  
                     break
                   case 3:
-                    filtro_precio(70000,999999)
+                    filtro_precio(90,999999)
                     break
               }    
           }
