@@ -151,9 +151,9 @@ btn_pagar.onclick = function(){
     if (pedales_en_carro.length==0){
         Swal.fire({
             icon: 'error',
-            title: 'Oops...',
-            text: 'Something went wrong!',
-            footer: '<a href="">Why do I have this issue?</a>'
+            title: 'Ups...',
+            text: 'Tu carro esta vacío',
+            
           })
     }else{
         Swal.fire({
