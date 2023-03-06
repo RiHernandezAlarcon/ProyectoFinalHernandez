@@ -147,8 +147,41 @@ let div_txt = document.getElementById("div_txt_carro")
 let main_carro = document.getElementById("main_carro")
 
 btn_pagar.onclick = function(){
-    div_txt.innerHTML = `<h1>Muchas gracias por tu compra</h1>`
-    main_carro.innerHTML = ``
+    console.log(pedales_en_carro)
+    if (pedales_en_carro.length==0){
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Something went wrong!',
+            footer: '<a href="">Why do I have this issue?</a>'
+          })
+    }else{
+        Swal.fire({
+            title: 'Estas a punto de realizar la compra',
+            text: "Estas segur@?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Comprar!',
+            cancelButtonText: 'Cancelar'
 
-    localStorage.clear()
+          }).then((result) => {
+            if (result.isConfirmed) {
+              Swal.fire(
+                'Compra realizada',
+                'Tu pedido llegara en 2 días',
+                'success'
+              )
+                div_txt.innerHTML = `<h1>Muchas gracias por tu preferencia</h1>`
+                main_carro.innerHTML = ``
+                localStorage.clear()
+            }
+          })
+
+        
+    }
+    
+
+
 }
