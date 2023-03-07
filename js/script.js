@@ -1,7 +1,4 @@
-let pedales_en_carro = []
-if(localStorage.getItem("pedales_en_carro")){
-    pedales_en_carro = JSON.parse(localStorage.getItem("pedales_en_carro"))
-}
+let pedales_en_carro = JSON.parse(localStorage.getItem("pedales_en_carro")) || []
 
 class Pedal{
     constructor(id,nombre,marca,precio,img){

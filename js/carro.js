@@ -1,13 +1,7 @@
-let pedales_en_carro = []
+let pedales_en_carro = JSON.parse(localStorage.getItem("pedales_en_carro")) || []
+let lista_pedales = JSON.parse(localStorage.getItem("lista_pedales")) || []
 
-if(localStorage.getItem("pedales_en_carro")){
-    pedales_en_carro = JSON.parse(localStorage.getItem("pedales_en_carro"))
-}
 
-let lista_pedales = []
-if(localStorage.getItem("lista_pedales")){
-    lista_pedales = JSON.parse(localStorage.getItem("lista_pedales"))
-}
 console.log(lista_pedales)
 console.log(pedales_en_carro[1])
 
