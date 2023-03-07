@@ -2,8 +2,6 @@ let pedales_en_carro = JSON.parse(localStorage.getItem("pedales_en_carro")) || [
 let lista_pedales = JSON.parse(localStorage.getItem("lista_pedales")) || []
 
 
-console.log(lista_pedales)
-console.log(pedales_en_carro[1])
 
 let productos_carro = document.getElementById("cards_in_carro")
 
@@ -32,8 +30,6 @@ function pedales_to_pedales_resumen(){
         cantidad.push(1)
     }
     })
-    console.log("pedales_en_resumen")
-    console.log(pedales_resumen)
 }
 
 pedales_to_pedales_resumen()
@@ -45,8 +41,6 @@ let total_txt = document.getElementById("total_pagar")
 function mostrar_carro(){
     total_value = 0
     productos_carro.innerHTML = ``
-    console.log("pedales resumen en mostrar carro()")
-    console.log(pedales_resumen)
     pedales_resumen.forEach(pedal => {
         productos_carro.innerHTML += 
         ` <div class="card_in_carro" id="card_pedal_${pedal.id}">
@@ -118,13 +112,10 @@ function refresh_values(){
 let btn_eliminate_list
 function activate_eliminar_pedal(){
     btn_eliminate_list = Array.from(document.getElementsByClassName("btn_eliminate"))
-    console.log("buttons")
-    console.log(btn_eliminate_list)
     btn_eliminate_list.forEach(btn => {
     btn.onclick = function(){
         let id_pedal = parseInt(btn.id.split('btn_elim_')[1])
         let pedales_a_conservar = pedales_en_carro.filter(pedal => pedal.id != id_pedal);
-        console.log(pedales_a_conservar)
         pedales_en_carro = pedales_a_conservar
         localStorage.setItem("pedales_en_carro", JSON.stringify(pedales_en_carro))
         pedales_to_pedales_resumen()
@@ -141,7 +132,6 @@ let div_txt = document.getElementById("div_txt_carro")
 let main_carro = document.getElementById("main_carro")
 
 btn_pagar.onclick = function(){
-    console.log(pedales_en_carro)
     if (pedales_en_carro.length==0){
         Swal.fire({
             icon: 'error',
@@ -171,11 +161,6 @@ btn_pagar.onclick = function(){
                 main_carro.innerHTML = ``
                 localStorage.clear()
             }
-          })
-
-        
+          })        
     }
-    
-
-
 }

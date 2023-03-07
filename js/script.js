@@ -1,3 +1,4 @@
+//sintaxis avanzada para obtener pedales en carro si esque exisen
 let pedales_en_carro = JSON.parse(localStorage.getItem("pedales_en_carro")) || []
 
 class Pedal{
@@ -32,7 +33,6 @@ function read_pedales(){
     lista_pedales.push(pedal0,pedal1,pedal2,pedal3,pedal4,pedal5,pedal6,pedal7,pedal8,pedal9,pedal10,pedal11,pedal12,pedal13)
     localStorage.setItem("lista_pedales", JSON.stringify(lista_pedales))
 }
-
 
 let productos = document.getElementById("div_productos")
 
@@ -95,7 +95,6 @@ function activate_events_button(){
     }) 
 }
  
-
 let rb_list = document.querySelectorAll(".rb")
 
 function activate_filtro_precio(){
@@ -139,8 +138,6 @@ rb_list[3].onclick= function(){
     rb_list[3].cheked = true
     activate_filtro_precio()
 }
-
-// activate_filtro_precio()
 
 //consumo API del valor del dolar en pesos chilenos
 let valor_dolar
